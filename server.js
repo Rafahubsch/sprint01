@@ -71,3 +71,38 @@ app.get('/requisicao', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`)
 })
+
+
+//Sprint-02
+import express from "express";
+
+const app = express();
+const PORT = 3000;
+const mensagens = [
+  { id: 1, usuario: 'Ana', texto: 'Bem-vindo à Central de Informações da Escola!' },
+  { id: 2, usuario: 'Pedro', texto: 'Quando começam as aulas de Desenvolvimento de Sistemas?' },
+  { id: 3, usuario: 'Maria', texto: 'Onde encontro a lista de cursos disponíveis?' },
+  { id: 4, usuario: 'Lucas', texto: 'Qual o horário de atendimento do professor Carlos?' },
+  { id: 5, usuario: 'Carla', texto: 'Muito obrigada pelas orientações!' }
+]
+function listarMensagens() { return mensagens; }
+
+app.get("/", (req, res) => res.send("Servidor rodando! 🚀"));
+
+app.get("/status", (req, res) => res.json({ status: "online", sprint: 2 }));
+
+app.get("/sobre", (req, res) => res.send("Projeto Mensageiro Local"));
+
+app.get("/mensagens", (req, res) => res.json(listarMensagens()));
+
+app.get("/mensagens/:id", (req, res) => {
+  const mensagem = mensagens.find(m => m.id === Number(req.params.id));
+  if (!mensagem) return res.status(404).json({ erro: "Não encontrada" });
+  res.json(mensagem);
+});
+
+app.get("/total-mensagens", (req, res) => res.json({ total: mensagens.length }));
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Servidor em http://localhost:${PORT}`);
+});

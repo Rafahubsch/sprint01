@@ -74,10 +74,7 @@ app.listen(PORT, () => {
 
 
 //Sprint-02
-import express from "express";
 
-const app = express();
-const PORT = 3000;
 const mensagens = [
   { id: 1, usuario: 'Ana', texto: 'Bem-vindo à Central de Informações da Escola!' },
   { id: 2, usuario: 'Pedro', texto: 'Quando começam as aulas de Desenvolvimento de Sistemas?' },
